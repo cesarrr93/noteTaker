@@ -1,7 +1,7 @@
 const util = require("util");
-const fs = requires("fs");
+const fs = require("fs");
 
-const uuidv1 = require ('uuid/v1'); // npm package to create unique id
+const { v4: uuidv4 } = require('uuid'); // npm package to create unique id
 
 const readFileAsync = util.promisify(fs.readFile); // reads file
 const writeFileAsync = util.promisify(fs.writeFile);  // write file
@@ -36,7 +36,7 @@ class Notas {
             throw new Error("Please enter a title and text. Try again");
         }
 
-        const newNota = { title, text, id:uuidv1() };
+        const newNota = { title, text, id:uuidv4() };
 
         return this.getNotas()
             .then(nota => [...nota, newNota])
